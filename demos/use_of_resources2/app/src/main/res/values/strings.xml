@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">use_of_resources</string>
+    <string name="welcome_to_android">Welcome to Android</string>
+    <string name="welcome_user">welcome User</string>
+    <string name="welcome_image">welcome image</string>
+    <string name="password">password</string>
+    <string name="welcome_to_bitcode">Welcome to Bitcode</string>
+    <string name="enquire_form">Enquiry Form</string>
+    <string name="name">Name:</string>
+    <string name="logo_of_company">logo of company</string>
+    <string name="phone_no">Phone no</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="college_name">college name</string>
+    <string name="technology">Technology</string>
+    <string name="year_n_of_passing">year \n of passing</string>
+    <string name="submit">Submit</string>
+
+    <string-array name="student">
+
+        <item>Ansh</item>
+        <item>tom</item>
+        <item>jerry</item>
+        <item>alice</item>
+        <item>william</item>
+
+    </string-array>
+
+</resources>

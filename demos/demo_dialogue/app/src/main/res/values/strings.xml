@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">demo_dialogue</string>
+    <string name="different_types_of_dialogs">Different types of Dialogs</string>
+    <string name="alert_dialog">Alert Dialog</string>
+    <string name="datepicker_dialog">Datepicker dialog</string>
+    <string name="timepicker_dialog">Timepicker Dialog</string>
+</resources>

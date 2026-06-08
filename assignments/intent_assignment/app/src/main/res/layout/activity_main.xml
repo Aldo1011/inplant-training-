@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/main_stye"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginStart="50dp"
+        android:id="@+id/spotImageView"
+        android:contentDescription="@string/the_spot_image_is_here"
+
+        />
+
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotImageView"
+        style="@style/main_stye"
+        android:text="@string/bmw"
+        android:textSize="30sp"
+        android:id="@+id/bmwbtn"
+
+        />
+
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/bmwbtn"
+        app:layout_constraintTop_toBottomOf="@+id/spotImageView"
+        style="@style/main_stye"
+        android:text="@string/audi"
+        android:textSize="30sp"
+        android:id="@+id/audibtn"
+        android:layout_marginStart="100dp"
+
+        />
+
+    <!--==================-->
+
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bmwbtn"
+        style="@style/main_stye"
+        android:text="@string/porsche"
+        android:textSize="30sp"
+        android:id="@+id/porschebtn"
+
+        />
+
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/porschebtn"
+        app:layout_constraintTop_toBottomOf="@+id/audibtn"
+        style="@style/main_stye"
+        android:text="@string/bently"
+        android:textSize="30sp"
+        android:id="@+id/bentlybtn"
+        android:layout_marginStart="60dp"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

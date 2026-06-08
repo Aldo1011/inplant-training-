@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="width">200dp</dimen>
+    <dimen name="height">200dp</dimen>
+    <dimen name="corner_radius">30dp</dimen>
+    <dimen name="textsize">20sp</dimen>
+    <dimen name="height_Edit_View">40dp</dimen>
+
+</resources>
