@@ -4,4 +4,6 @@
     <string name="alert_dialog">Alert Dialog</string>
     <string name="datepicker_dialog">Datepicker dialog</string>
     <string name="timepicker_dialog">Timepicker Dialog</string>
+    <string name="year_d_month_d_day_d">year:%d month:%d day:%d</string>
+    <string name="progress_dialog">progress dialog</string>
 </resources>

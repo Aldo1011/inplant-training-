@@ -45,5 +45,14 @@
 
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/progress_dialog"
+        android:id="@+id/btnProgressDialog"
+        style="@style/main_style"
+        />
+
+
 
 </LinearLayout>
