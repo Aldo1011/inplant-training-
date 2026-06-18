@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">custom dialog</string>
+    <string name="different_way_to_add_custom_dialog">Different way to add custom dialog</string>
+    <string name="custom_dialog_way_1">Custom dialog way 1</string>
+    <string name="custom_dialog_way_2">custom dialog way 2</string>
+    <string name="custom_dialog_way_3">Custom dialog way 3</string>
+    <string name="login">Login</string>
+    <string name="enter_user_name">enter user name</string>
+    <string name="next">next</string>
+    <string name="enter_password">Enter password</string>
+    <string name="dismiss">Dismiss</string>
+</resources>
