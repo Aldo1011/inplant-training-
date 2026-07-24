@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="600dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/image_slider"
+        style="@style/mainStyle"
+        android:textAlignment="center"
+        
+        />
+
+    <ImageSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/mainStyle"
+        android:id="@+id/imageSlider"
+        android:layout_weight="1"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/mainStyle"
+            android:text="@string/delaytime"
+            android:textSize="16sp"
+            android:layout_marginEnd="0dp"
+
+            />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/mainStyle"
+            android:id="@+id/delaySpinner"
+
+            />
+
+
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/mainStyle"
+        android:text="@string/loop"
+        android:textSize="20sp"
+        android:id="@+id/loopCheckBox"
+
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/mainStyle"
+        android:text="@string/exit"
+        android:textSize="20sp"
+        android:paddingEnd="48sp"
+        android:paddingStart="48sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/exitBtn"
+
+        />
+
+
+</LinearLayout>

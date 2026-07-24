@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MachineTask2</string>
+    <string name="image_slider">Image Slider</string>
+    <string name="loop">Loop</string>
+    <string name="exit">Exit</string>
+    <string name="delaytime">Delaytime</string>
+    <string name="image_gallery">Image gallery</string>
+    <string name="slideshow">Slideshow</string>
+</resources>

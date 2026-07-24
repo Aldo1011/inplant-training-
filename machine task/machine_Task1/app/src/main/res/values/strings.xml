@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MachineTask1</string>
+    <string name="upper_case">Upper Case</string>
+    <string name="lower_case">Lower Case</string>
+    <string name="init_capitalization">Init Capitalization</string>
+    <string name="reverse_text">Reverse Text</string>
+    <string name="save">Save</string>
+    <string name="edit_text_here">Edit text here</string>
+    <string name="edit_text">Edit Text</string>
+    <string name="editor_app">Editor App</string>
+</resources>
