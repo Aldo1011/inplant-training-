@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1040208312832",
+    "project_id": "internshipproject-codestreak",
+    "storage_bucket": "internshipproject-codestreak.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040208312832:android:dc8cf14fd7ac3ed92476e5",
+        "android_client_info": {
+          "package_name": "com.example.internshipproject_codestreak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf-TZUQv8ZiySbaEqqe2j8S1t8RidrGPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
