@@ -1,10 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.example.internshipproject_codestreak"
+    namespace = "com.example.exit_machinetest"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.internshipproject_codestreak"
+        applicationId = "com.example.exit_machinetest"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -38,26 +37,14 @@ dependencies {
     implementation(libs.activity.ktx)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
-    implementation(libs.credentials)
-    implementation(libs.credentials.play.services.auth)
-    implementation(libs.firebase.auth)
-    implementation(libs.googleid)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
-    implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-firestore")
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
-
-
-    implementation("com.google.android.filament:filament-android:1.74.0")
-    implementation("com.google.android.filament:gltfio-android:1.74.0")
-    implementation("com.google.android.filament:filament-utils-android:1.74.0")
-
-
-
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
 }
+
+
 

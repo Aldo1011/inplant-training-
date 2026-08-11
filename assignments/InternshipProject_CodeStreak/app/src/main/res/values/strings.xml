@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">InternshipProject_CodeStreak</string>
+    <string name="sign_up">Sign-Up</string>
+    <string name="codestreak">CodeStreak</string>
+    <string name="tag_line">Learn Code Have Fun</string>
+    <string name="create_account">Create Account</string>
+    <string name="submit">Submit</string>
 </resources>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/signup_style"
+        android:text="@string/codestreak"
+        android:textAlignment="center"
+
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/signup_style"
+
+        android:text="@string/tag_line"
+        android:textAlignment="center"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account"
+            style="@style/signup_style"
+            android:textSize="18sp"
+            android:textAlignment="center"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:paddingBottom="0sp"
+            android:paddingTop="0sp"
+            android:textSize="13sp"
+            android:layout_marginStart="40dp"
+            android:text="Username"
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:textSize="18sp"
+            android:paddingBottom="5sp"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="40dp"
+            android:inputType="text"
+            android:autofillHints="username"
+
+            android:id="@+id/UsernameEditView_Sign"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:paddingBottom="0sp"
+            android:paddingTop="0sp"
+            android:textSize="13sp"
+            android:layout_marginStart="40dp"
+            android:text="Email"
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:textSize="18sp"
+            android:paddingBottom="5sp"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="40dp"
+            android:inputType="textEmailAddress"
+            android:id="@+id/emailEditView_Sign"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:paddingBottom="0sp"
+            android:paddingTop="0sp"
+            android:textSize="13sp"
+            android:layout_marginStart="40dp"
+            android:text="Password"
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:textSize="18sp"
+            android:paddingBottom="5sp"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="40dp"
+            android:inputType="textPassword"
+            android:id="@+id/passwordEditView_Sign"
+
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/signup_style"
+            android:textSize="16sp"
+            android:paddingStart="32sp"
+            android:paddingEnd="32sp"
+            android:paddingTop="16sp"
+            android:paddingBottom="16sp"
+            android:text="@string/submit"
+            android:layout_gravity="center"
+            android:id="@+id/submitBtn_sign"
+
+            />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
