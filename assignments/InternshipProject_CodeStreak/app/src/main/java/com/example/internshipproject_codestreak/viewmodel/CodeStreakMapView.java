@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.internshipproject_codestreak.R;
-import com.example.internshipproject_codestreak.models.Lesson;
 
 import java.util.ArrayList;
 import java.util.List;

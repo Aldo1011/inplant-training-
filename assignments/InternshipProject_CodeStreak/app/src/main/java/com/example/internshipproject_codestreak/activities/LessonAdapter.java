@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.internshipproject_codestreak.R;
-import com.example.internshipproject_codestreak.models.Lesson;
+import com.example.internshipproject_codestreak.viewmodel.Lesson;
 
 import java.util.List;
 
