@@ -8,7 +8,9 @@ public class Challenge {
         MULTIPLE_CHOICE,
         CODE_OUTPUT,
         CODE_FIX,
-        CODE_WRITE
+        CODE_WRITE,
+        CODE_EXECUTION
+
     }
 
     private int id;
@@ -18,6 +20,8 @@ public class Challenge {
     private List<String> options;
     private String expectedAnswer;
     private String explanation;
+
+    private List<TestCase> testCases;
 
     public Challenge() {
         // Required for Firebase
@@ -30,7 +34,8 @@ public class Challenge {
             String code,
             List<String> options,
             String expectedAnswer,
-            String explanation
+            String explanation,
+            List<TestCase> testCases
     ) {
         this.id = id;
         this.type = type;
@@ -39,7 +44,14 @@ public class Challenge {
         this.options = options;
         this.expectedAnswer = expectedAnswer;
         this.explanation = explanation;
+        this.testCases = testCases;
+
     }
+
+    public List<TestCase> getTestCases() {
+        return testCases;
+    }
+
 
     public int getId() {
         return id;

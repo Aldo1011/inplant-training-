@@ -1,5 +1,8 @@
 package com.example.internshipproject_codestreak.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private String username;
@@ -10,6 +13,18 @@ public class User {
     private int currentWorld;
     private int currentLesson;
     private int hearts;
+
+    private List<Integer> completedLessons;
+
+    public String getLastHeartReset() {
+        return lastHeartReset;
+    }
+
+    public void setLastHeartReset(String lastHeartReset) {
+        this.lastHeartReset = lastHeartReset;
+    }
+
+    private String lastHeartReset;
 
     public String getUsername() {
         return username;
@@ -75,7 +90,30 @@ public class User {
         this.hearts = hearts;
     }
 
+    public List<Integer> getCompletedLessons() {
+        return completedLessons;
+    }
 
+    public void setCompletedLessons(List<Integer> completedLessons) {
+        this.completedLessons = completedLessons;
+    }
+
+    public boolean hasCompletedLesson(int lessonId) {
+
+        return completedLessons != null
+                && completedLessons.contains(lessonId);
+    }
+
+    public void completeLesson(int lessonId) {
+
+        if (completedLessons == null) {
+            completedLessons = new ArrayList<>();
+        }
+
+        if (!completedLessons.contains(lessonId)) {
+            completedLessons.add(lessonId);
+        }
+    }
 
     public User() {
         // Required for Firebase
@@ -86,6 +124,8 @@ public class User {
         currentWorld = 1;
         currentLesson = 1;
         hearts = 5;
+        lastHeartReset = null;
+        completedLessons = new ArrayList<>();
 
     }
 

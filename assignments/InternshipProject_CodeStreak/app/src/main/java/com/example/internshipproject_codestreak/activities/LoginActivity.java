@@ -14,8 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.internshipproject_codestreak.MainActivity;
 import com.example.internshipproject_codestreak.R;
+import com.example.internshipproject_codestreak.viewmodel.CodeExecutionEngine;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
@@ -49,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent2=new Intent(LoginActivity.this,SignupActivity.class);
+                Intent intent2=new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent2);
                 finish();
 
@@ -63,21 +67,20 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        FirebaseUser currentUser =
+                mAuth.getCurrentUser();
 
+        if (currentUser != null) {
 
-        FirebaseUser curretUser=mAuth.getCurrentUser();
+            Intent homeIntent =
+                    new Intent(
+                            LoginActivity.this,
+                            HomeActivity.class
+                    );
 
-        if(curretUser!=null){
-
-            startActivity(intent);
-
+            startActivity(homeIntent);
+            finish();
         }
-
-
-
-
-
-
     }
 
     private void initViews(){

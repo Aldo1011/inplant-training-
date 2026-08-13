@@ -1,6 +1,8 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.chaquopy)
 }
 
 android {
@@ -19,6 +21,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters += listOf(
+                "arm64-v8a",
+                "x86_64"
+            )
+        }
+
     }
 
     buildTypes {
@@ -32,7 +42,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+
+
 }
+
+chaquopy {
+    defaultConfig {
+        version = "3.13"
+    }
+}
+
 
 dependencies {
     implementation(libs.activity.ktx)

@@ -17,8 +17,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.internshipproject_codestreak.data.LessonCatalog;
+import com.example.internshipproject_codestreak.repository.UserRepository;
 import com.example.internshipproject_codestreak.viewmodel.Challenge;
+import com.example.internshipproject_codestreak.viewmodel.CodeExecutionEngine;
 import com.example.internshipproject_codestreak.viewmodel.Lesson;
+import com.example.internshipproject_codestreak.viewmodel.TestCase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -48,10 +52,14 @@ public class LessonActivity extends AppCompatActivity {
 
     private Challenge currentChallenge;
 
+    private UserRepository userRepository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userRepository = new UserRepository();
 
         // ---------------------------------------
         // GET LESSON ID
@@ -62,7 +70,7 @@ public class LessonActivity extends AppCompatActivity {
                 -1
         );
 
-        Lesson  lesson = LessonCatalog.getLessonById(lessonId);
+        lesson = LessonCatalog.getLessonById(lessonId);
 
         if (lesson == null) {
 
@@ -451,6 +459,10 @@ public class LessonActivity extends AppCompatActivity {
                 buildOutputChallenge();
 
                 break;
+
+                case CODE_EXECUTION:
+                buildCodeExecutionChallenge();
+                break;
         }
     }
 
@@ -660,80 +672,54 @@ public class LessonActivity extends AppCompatActivity {
     // CHECK ANSWER
     // =====================================================
 
-    private void checkAnswer(
-            String answer
-    ) {
+    private void checkAnswer(String answer) {
 
-        String userAnswer =
-                normalize(answer);
+        String userAnswer = normalize(answer);
 
-        String expectedAnswer =
-                normalize(
-                        currentChallenge
-                                .getExpectedAnswer()
-                );
+        String expectedAnswer = normalize(
+                currentChallenge.getExpectedAnswer()
+        );
 
+        boolean correct = userAnswer.equals(expectedAnswer);
 
-        // ---------------------------------------
-        // CORRECT
-        // ---------------------------------------
-
-        if (userAnswer.equals(
-                expectedAnswer
-        )) {
+        if (correct) {
 
             resultText.setText(
                     "✓ Correct!\n\n"
-                            + currentChallenge
-                            .getExplanation()
+                            + currentChallenge.getExplanation()
             );
 
             resultText.setTextColor(
                     Color.rgb(30, 120, 60)
             );
 
-            resultText.setVisibility(
-                    View.VISIBLE
-            );
-
-
-            Button nextButton =
-                    createButton("Continue");
-
-            challengeContainer.addView(
-                    nextButton
-            );
-
-
-            nextButton.setOnClickListener(
-                    v -> {
-
-                        currentChallengeIndex++;
-
-                        showChallenge();
-                    }
-            );
-
-        }
-
-        // ---------------------------------------
-        // WRONG
-        // ---------------------------------------
-
-        else {
+        } else {
 
             resultText.setText(
-                    "Not quite. Try again!"
+                    "✗ Incorrect\n\n"
+                            + "Correct answer:\n"
+                            + currentChallenge.getExpectedAnswer()
+                            + "\n\n"
+                            + currentChallenge.getExplanation()
             );
 
             resultText.setTextColor(
                     Color.rgb(180, 40, 40)
             );
-
-            resultText.setVisibility(
-                    View.VISIBLE
-            );
         }
+
+        resultText.setVisibility(View.VISIBLE);
+
+        Button nextButton = createButton("Continue");
+
+        challengeContainer.addView(nextButton);
+
+        nextButton.setOnClickListener(v -> {
+
+            currentChallengeIndex++;
+
+            showChallenge();
+        });
     }
 
 
@@ -749,21 +735,13 @@ public class LessonActivity extends AppCompatActivity {
                 "Lesson Complete!"
         );
 
-
-        TextView completion =
-                new TextView(this);
+        TextView completion = new TextView(this);
 
         completion.setText(
-                "🎉 You completed "
-                        + lesson.getTitle()
-                        + "!\n\n+"
-                        + lesson.getXpReward()
-                        + " XP"
+                "Completing lesson..."
         );
 
-        completion.setTextSize(
-                22
-        );
+        completion.setTextSize(22);
 
         completion.setTextColor(
                 Color.BLACK
@@ -773,18 +751,125 @@ public class LessonActivity extends AppCompatActivity {
                 completion
         );
 
+        FirebaseAuth auth =
+                FirebaseAuth.getInstance();
 
-        Button backButton =
-                createButton("Back to Map");
+        if (auth.getCurrentUser() == null) {
 
-        challengeContainer.addView(
-                backButton
-        );
+            Toast.makeText(
+                    this,
+                    "Could not find logged-in user.",
+                    Toast.LENGTH_LONG
+            ).show();
 
+            return;
+        }
 
-        backButton.setOnClickListener(
-                v -> finish()
-        );
+        String uid =
+                auth.getCurrentUser().getUid();
+
+        userRepository.getUser(uid)
+                .addOnSuccessListener(user -> {
+
+                    if (user == null) {
+
+                        Toast.makeText(
+                                this,
+                                "User data not found.",
+                                Toast.LENGTH_LONG
+                        ).show();
+
+                        return;
+                    }
+
+                    // ---------------------------------------
+                    // ADD XP
+                    // ---------------------------------------
+
+                    user.setXp(
+                            user.getXp()
+                                    + lesson.getXpReward()
+                    );
+
+                    // ---------------------------------------
+                    // REMOVE ONE HEART
+                    // ---------------------------------------
+
+                    user.setHearts(
+                            Math.max(
+                                    0,
+                                    user.getHearts() - 1
+                            )
+                    );
+
+                    //get completed lesson id
+
+                    user.completeLesson(
+                            lesson.getId()
+                    );
+
+                    // ---------------------------------------
+                    // SAVE USER
+                    // ---------------------------------------
+
+                    userRepository.updateUser(
+                            uid,
+                            user
+                    ).addOnSuccessListener(unused -> {
+
+                        completion.setText(
+                                "🎉 You completed "
+                                        + lesson.getTitle()
+                                        + "!\n\n"
+                                        + "+"
+                                        + lesson.getXpReward()
+                                        + " XP"
+                                        + "\n\n"
+                                        + "❤️ Hearts remaining: "
+                                        + user.getHearts()
+                        );
+
+                        Button backButton =
+                                createButton(
+                                        "Back to Map"
+                                );
+
+                        challengeContainer.addView(
+                                backButton
+                        );
+
+                        backButton.setOnClickListener(
+                                v -> finish()
+                        );
+
+                    }).addOnFailureListener(e -> {
+
+                        completion.setText(
+                                "Lesson completed, "
+                                        + "but your progress "
+                                        + "could not be saved."
+                        );
+
+                        Toast.makeText(
+                                this,
+                                "Failed to save progress.",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    });
+
+                })
+                .addOnFailureListener(e -> {
+
+                    completion.setText(
+                            "Could not load your progress."
+                    );
+
+                    Toast.makeText(
+                            this,
+                            "Failed to load user data.",
+                            Toast.LENGTH_LONG
+                    ).show();
+                });
     }
 
 
@@ -876,6 +961,203 @@ public class LessonActivity extends AppCompatActivity {
                         .density
                         + 0.5f
         );
+    }
+
+    private void buildCodeExecutionChallenge() {
+
+        EditText codeInput = new EditText(this);
+
+        codeInput.setHint(
+                "Write your Python program here..."
+        );
+
+        codeInput.setTextSize(16);
+
+        codeInput.setGravity(
+                Gravity.TOP | Gravity.START
+        );
+
+        codeInput.setMinLines(10);
+
+        codeInput.setInputType(
+                InputType.TYPE_CLASS_TEXT
+                        | InputType.TYPE_TEXT_FLAG_MULTI_LINE
+        );
+
+        addTopMargin(codeInput, 15);
+
+        challengeContainer.addView(codeInput);
+
+        Button runButton =
+                createButton("Run");
+
+        challengeContainer.addView(runButton);
+
+        runButton.setOnClickListener(v -> {
+
+            String code =
+                    codeInput.getText()
+                            .toString();
+
+            executeBossCode(
+                    code,
+                    runButton
+            );
+        });
+    }
+
+    private void executeBossCode(
+            String code,
+            Button runButton
+    ) {
+
+        List<TestCase> testCases =
+                currentChallenge.getTestCases();
+
+        if (testCases == null
+                || testCases.isEmpty()) {
+
+            resultText.setText(
+                    "No test cases configured."
+            );
+
+            resultText.setVisibility(
+                    View.VISIBLE
+            );
+
+            return;
+        }
+
+        runButton.setEnabled(false);
+
+        boolean allPassed = true;
+
+        StringBuilder result =
+                new StringBuilder();
+
+        for (int i = 0;
+             i < testCases.size();
+             i++) {
+
+            TestCase testCase =
+                    testCases.get(i);
+
+            CodeExecutionEngine.ExecutionResult executionResult =
+                    CodeExecutionEngine.execute(
+                            code,
+                            testCase.getInput()
+                    );
+
+            String actualOutput =
+                    normalize(
+                            executionResult.getOutput()
+                    );
+
+            String expectedOutput =
+                    normalize(
+                            testCase.getExpectedOutput()
+                    );
+
+            if (!executionResult.isSuccess()) {
+
+                allPassed = false;
+
+                result.append(
+                        "Test "
+                                + (i + 1)
+                                + " failed.\n\n"
+                );
+
+                result.append(
+                        "Error:\n"
+                                + executionResult.getError()
+                                + "\n\n"
+                );
+
+                break;
+            }
+
+            if (!actualOutput.equals(
+                    expectedOutput
+            )) {
+
+                allPassed = false;
+
+                result.append(
+                        "Test "
+                                + (i + 1)
+                                + " failed.\n\n"
+                );
+
+                result.append(
+                        "Expected:\n"
+                                + expectedOutput
+                                + "\n\n"
+                );
+
+                result.append(
+                        "Got:\n"
+                                + actualOutput
+                                + "\n\n"
+                );
+
+                break;
+            }
+
+            result.append(
+                    "✓ Test "
+                            + (i + 1)
+                            + " passed.\n"
+            );
+        }
+
+        if (allPassed) {
+
+            result.insert(
+                    0,
+                    "🎉 All tests passed!\n\n"
+            );
+
+            result.append(
+                    "\n"
+                            + currentChallenge
+                            .getExplanation()
+            );
+
+        } else {
+
+            result.insert(
+                    0,
+                    "✗ Your solution didn't pass all tests.\n\n"
+            );
+        }
+
+        resultText.setText(
+                result.toString()
+        );
+
+        resultText.setVisibility(
+                View.VISIBLE
+        );
+
+        runButton.setEnabled(true);
+
+        if (allPassed) {
+
+            Button continueButton =
+                    createButton("Continue");
+
+            challengeContainer.addView(
+                    continueButton
+            );
+
+            continueButton.setOnClickListener(v -> {
+
+                currentChallengeIndex++;
+
+                showChallenge();
+            });
+        }
     }
 
 

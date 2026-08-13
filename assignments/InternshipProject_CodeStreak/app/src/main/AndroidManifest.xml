@@ -29,7 +29,10 @@
         <activity android:name=".activities.LoginActivity"/>
         <activity android:name=".activities.HomeActivity"/>
         <activity android:name=".activities.SignupActivity"/>
-        
+        <activity android:name=".activities.LessonActivity"/>
+
+            />
+
     </application>
 
 </manifest>
