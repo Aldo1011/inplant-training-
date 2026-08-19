@@ -75,6 +75,8 @@ dependencies {
     implementation("com.google.android.filament:filament-android:1.74.0")
     implementation("com.google.android.filament:gltfio-android:1.74.0")
     implementation("com.google.android.filament:filament-utils-android:1.74.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
 
 
 

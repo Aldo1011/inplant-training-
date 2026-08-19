@@ -22,6 +22,7 @@ import com.example.internshipproject_codestreak.viewmodel.Challenge;
 import com.example.internshipproject_codestreak.viewmodel.CodeExecutionEngine;
 import com.example.internshipproject_codestreak.viewmodel.Lesson;
 import com.example.internshipproject_codestreak.viewmodel.TestCase;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -674,52 +675,22 @@ public class LessonActivity extends AppCompatActivity {
 
     private void checkAnswer(String answer) {
 
-        String userAnswer = normalize(answer);
+        String userAnswer =
+                normalize(answer);
 
-        String expectedAnswer = normalize(
-                currentChallenge.getExpectedAnswer()
+        String expectedAnswer =
+                normalize(
+                        currentChallenge.getExpectedAnswer()
+                );
+
+        boolean correct =
+                userAnswer.equals(
+                        expectedAnswer
+                );
+
+        showExplanationSheet(
+                correct
         );
-
-        boolean correct = userAnswer.equals(expectedAnswer);
-
-        if (correct) {
-
-            resultText.setText(
-                    "✓ Correct!\n\n"
-                            + currentChallenge.getExplanation()
-            );
-
-            resultText.setTextColor(
-                    Color.rgb(30, 120, 60)
-            );
-
-        } else {
-
-            resultText.setText(
-                    "✗ Incorrect\n\n"
-                            + "Correct answer:\n"
-                            + currentChallenge.getExpectedAnswer()
-                            + "\n\n"
-                            + currentChallenge.getExplanation()
-            );
-
-            resultText.setTextColor(
-                    Color.rgb(180, 40, 40)
-            );
-        }
-
-        resultText.setVisibility(View.VISIBLE);
-
-        Button nextButton = createButton("Continue");
-
-        challengeContainer.addView(nextButton);
-
-        nextButton.setOnClickListener(v -> {
-
-            currentChallengeIndex++;
-
-            showChallenge();
-        });
     }
 
 
@@ -1164,6 +1135,164 @@ public class LessonActivity extends AppCompatActivity {
                 showChallenge();
             });
         }
+    }
+
+    private void showExplanationSheet(
+            boolean correct
+    ) {
+
+        BottomSheetDialog dialog =
+                new BottomSheetDialog(this);
+
+        LinearLayout container =
+                new LinearLayout(this);
+
+        container.setOrientation(
+                LinearLayout.VERTICAL
+        );
+
+        container.setPadding(
+                dp(24),
+                dp(18),
+                dp(24),
+                dp(26)
+        );
+
+        container.setBackground(
+                getRoundedTopBackground()
+        );
+
+
+        // ---------------------------------------
+        // RESULT
+        // ---------------------------------------
+
+        TextView result =
+                new TextView(this);
+
+        result.setText(
+                correct
+                        ? "✓ Correct!"
+                        : "✗ Not quite"
+        );
+
+        result.setTextSize(23);
+
+        result.setTypeface(
+                null,
+                android.graphics.Typeface.BOLD
+        );
+
+        result.setTextColor(
+                correct
+                        ? Color.rgb(30, 150, 75)
+                        : Color.rgb(200, 50, 50)
+        );
+
+        container.addView(result);
+
+
+        // ---------------------------------------
+        // EXPLANATION
+        // ---------------------------------------
+
+        TextView explanation =
+                new TextView(this);
+
+        explanation.setText(
+                correct
+                        ? currentChallenge
+                          .getExplanation()
+
+                        : "Correct answer:\n"
+                          + currentChallenge
+                            .getExpectedAnswer()
+                          + "\n\n"
+                          + currentChallenge
+                            .getExplanation()
+        );
+
+        explanation.setTextSize(16);
+
+        explanation.setTextColor(
+                Color.DKGRAY
+        );
+
+        LinearLayout.LayoutParams
+                explanationParams =
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+
+        explanationParams.topMargin =
+                dp(14);
+
+        container.addView(
+                explanation,
+                explanationParams
+        );
+
+
+        // ---------------------------------------
+        // CONTINUE
+        // ---------------------------------------
+
+        Button continueButton =
+                createButton("Continue");
+
+        LinearLayout.LayoutParams
+                buttonParams =
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+
+        buttonParams.topMargin =
+                dp(20);
+
+        container.addView(
+                continueButton,
+                buttonParams
+        );
+
+        continueButton.setOnClickListener(
+                v -> {
+
+                    dialog.dismiss();
+
+                    currentChallengeIndex++;
+
+                    showChallenge();
+                }
+        );
+
+        dialog.setContentView(
+                container
+        );
+
+        dialog.show();
+    }
+
+    private android.graphics.drawable.GradientDrawable
+    getRoundedTopBackground() {
+
+        android.graphics.drawable.GradientDrawable
+                background =
+                new android.graphics.drawable.GradientDrawable();
+
+        background.setColor(Color.WHITE);
+
+        background.setCornerRadii(
+                new float[]{
+                        dp(26), dp(26),
+                        dp(26), dp(26),
+                        0, 0,
+                        0, 0
+                }
+        );
+
+        return background;
     }
 
 

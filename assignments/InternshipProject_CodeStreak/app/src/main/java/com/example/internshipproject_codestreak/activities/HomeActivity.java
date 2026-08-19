@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import com.example.internshipproject_codestreak.R;
 import com.example.internshipproject_codestreak.data.LessonCatalog;
@@ -42,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.homepage_activity);
@@ -117,6 +121,16 @@ public class HomeActivity extends AppCompatActivity {
         xpCard.setOnClickListener(
                 v -> wiggleCard(xpCard)
         );
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            checkDailyHearts();
+        }
 
     }
 

@@ -1,143 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cs_secondary"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/signup_style"
-        android:text="@string/codestreak"
-        android:textAlignment="center"
-
-
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/signup_style"
-
-        android:text="@string/tag_line"
-        android:textAlignment="center"
-
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        android:paddingTop="55dp"
+        android:paddingBottom="40dp">
+
+        <!-- BRAND -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_account"
-            style="@style/signup_style"
-            android:textSize="18sp"
-            android:textAlignment="center"
-
-            />
+            android:text="CodeStreak"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@color/cs_primary"
+            android:gravity="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:paddingBottom="0sp"
-            android:paddingTop="0sp"
-            android:textSize="13sp"
-            android:layout_marginStart="40dp"
+            android:layout_marginTop="7dp"
+            android:text="Start your Python journey."
+            android:textSize="15sp"
+            android:textColor="@color/cs_text_muted"
+            android:gravity="center"/>
+
+
+        <!-- TITLE -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Create an account"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/cs_text"
+            android:gravity="center"/>
+
+
+        <!-- USERNAME LABEL -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="Username"
-
-            />
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/cs_text"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:textSize="18sp"
-            android:paddingBottom="5sp"
-            android:layout_marginTop="0dp"
-            android:layout_marginStart="40dp"
-            android:inputType="text"
-            android:autofillHints="username"
-
             android:id="@+id/UsernameEditView_Sign"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/custom_edit"
+            android:hint="Choose a username"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:textColor="@color/cs_text"
+            android:textColorHint="@color/cs_text_muted"
+            android:inputType="text"
+            android:autofillHints="username"/>
 
-            />
+
+        <!-- EMAIL -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:paddingBottom="0sp"
-            android:paddingTop="0sp"
-            android:textSize="13sp"
-            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:text="Email"
-
-            />
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/cs_text"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:textSize="18sp"
-            android:paddingBottom="5sp"
-            android:layout_marginTop="0dp"
-            android:layout_marginStart="40dp"
-            android:inputType="textEmailAddress"
             android:id="@+id/emailEditView_Sign"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/custom_edit"
+            android:hint="you@example.com"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:textColor="@color/cs_text"
+            android:textColorHint="@color/cs_text_muted"
+            android:inputType="textEmailAddress"/>
 
-            />
+
+        <!-- PASSWORD -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:paddingBottom="0sp"
-            android:paddingTop="0sp"
-            android:textSize="13sp"
-            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:text="Password"
-
-            />
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/cs_text"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:textSize="18sp"
-            android:paddingBottom="5sp"
-            android:layout_marginTop="0dp"
-            android:layout_marginStart="40dp"
-            android:inputType="textPassword"
             android:id="@+id/passwordEditView_Sign"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/custom_edit"
+            android:hint="At least 6 characters"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:textColor="@color/cs_text"
+            android:textColorHint="@color/cs_text_muted"
+            android:inputType="textPassword"/>
 
 
-            />
+        <!-- CREATE ACCOUNT -->
 
         <Button
+            android:id="@+id/submitBtn_sign"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="28dp"
+            android:text="Create Account"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/cs_white"
+            android:backgroundTint="@color/cs_primary"/>
+
+
+        <!-- LOGIN -->
+
+        <TextView
+            android:id="@+id/backToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/signup_style"
-            android:textSize="16sp"
-            android:paddingStart="32sp"
-            android:paddingEnd="32sp"
-            android:paddingTop="16sp"
-            android:paddingBottom="16sp"
-            android:text="@string/submit"
             android:layout_gravity="center"
-            android:id="@+id/submitBtn_sign"
+            android:layout_marginTop="22dp"
+            android:text="Already have an account? Login"
+            android:textSize="14sp"
+            android:textColor="@color/cs_primary"
+            android:clickable="true"
+            android:focusable="true"/>
 
-            />
 
+        <!-- TERMS -->
 
-
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="By creating an account, you agree to the CodeStreak Terms of Service and Privacy Policy."
+            android:textSize="12sp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/cs_text_muted"
+            android:gravity="center"/>
 
     </LinearLayout>
 
-
-</LinearLayout>
+</ScrollView>

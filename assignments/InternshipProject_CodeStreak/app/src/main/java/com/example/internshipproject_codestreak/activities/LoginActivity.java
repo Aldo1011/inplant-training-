@@ -2,6 +2,9 @@ package com.example.internshipproject_codestreak.activities;
 
 import static android.widget.Toast.LENGTH_LONG;
 
+
+import androidx.core.splashscreen.SplashScreen;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +44,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         initViews();

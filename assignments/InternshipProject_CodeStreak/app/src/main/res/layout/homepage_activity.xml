@@ -33,7 +33,7 @@
             android:textSize="26sp"
             android:textStyle="bold"
 
-            android:textColor="@color/cs_text"/>
+            android:textColor="@color/cs_primary"/>
 
         <TextView
             android:id="@+id/profileButton"

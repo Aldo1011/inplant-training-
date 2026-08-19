@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class SignupActivity extends AppCompatActivity {
      private FirebaseAuth mAuth;
 
     private UserRepository userRepository;
+    TextView backToLogin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,20 @@ public class SignupActivity extends AppCompatActivity {
 
         sumitSign_Up_Button.setOnClickListener(new SumitBtnListner());
 
+        backToLogin.setOnClickListener(
+                v -> {
+
+                    Intent intent =
+                            new Intent(
+                                    SignupActivity.this,
+                                    LoginActivity.class
+                            );
+
+                    startActivity(intent);
+                    finish();
+                }
+        );
+
     }
 
     private void initViews(){
@@ -53,6 +69,7 @@ public class SignupActivity extends AppCompatActivity {
         sumitSign_Up_Button=findViewById(R.id.submitBtn_sign);
         mAuth=FirebaseAuth.getInstance();
         userRepository = new UserRepository();
+        backToLogin = findViewById(R.id.backToLogin);
 
     }
 
@@ -150,12 +167,26 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-                        } else {
+                        }else {
 
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignupActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Exception exception = task.getException();
 
+                            Log.e(
+                                    TAG,
+                                    "createUserWithEmail:failure",
+                                    exception
+                            );
+
+                            String errorMessage =
+                                    exception != null
+                                            ? exception.getMessage()
+                                            : "Unknown authentication error";
+
+                            Toast.makeText(
+                                    SignupActivity.this,
+                                    errorMessage,
+                                    Toast.LENGTH_LONG
+                            ).show();
                         }
                     }
                 });
