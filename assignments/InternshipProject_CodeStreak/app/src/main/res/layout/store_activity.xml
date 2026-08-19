@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/cs_secondary"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+
+        android:padding="22dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="CodeStreak Store"
+
+            android:textSize="30sp"
+            android:textStyle="bold"
+
+            android:textColor="@color/cs_text"
+
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+
+            android:text="Power up your learning journey."
+
+            android:textSize="15sp"
+
+            android:textColor="@color/cs_text_muted"
+
+            android:gravity="center"/>
+
+
+        <!-- PREMIUM -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="32dp"
+
+            android:text="CodeStreak Premium"
+
+            android:textSize="23sp"
+            android:textStyle="bold"
+
+            android:textColor="@color/cs_text"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="14dp"
+            android:padding="18dp"
+
+            android:orientation="vertical"
+
+            android:background="@drawable/bg_stat_card">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="🔥 Streak Protection"
+
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="6dp"
+
+                android:text="Protect your streak when you miss a day."
+
+                android:textSize="14sp"
+
+                android:textColor="@color/cs_text_muted"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            android:padding="18dp"
+
+            android:orientation="vertical"
+
+            android:background="@drawable/bg_stat_card">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="❤️ Extra Hearts"
+
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="6dp"
+
+                android:text="Get more room to make mistakes while learning."
+
+                android:textSize="14sp"
+
+                android:textColor="@color/cs_text_muted"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            android:padding="18dp"
+
+            android:orientation="vertical"
+
+            android:background="@drawable/bg_stat_card">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="⚡ XP Boost"
+
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="6dp"
+
+                android:text="Earn more XP from completed lessons."
+
+                android:textSize="14sp"
+
+                android:textColor="@color/cs_text_muted"/>
+
+        </LinearLayout>
+
+
+        <!-- PLANS -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="32dp"
+
+            android:text="Choose your plan"
+
+            android:textSize="22sp"
+            android:textStyle="bold"
+
+            android:textColor="@color/cs_text"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="14dp"
+            android:padding="18dp"
+
+            android:background="@drawable/bg_stat_card"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:text="Yearly\nBest value"
+
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Coming soon"
+
+                android:textSize="14sp"
+
+                android:textColor="@color/cs_primary"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="12dp"
+            android:padding="18dp"
+
+            android:background="@drawable/bg_stat_card"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:text="Monthly"
+
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Coming soon"
+
+                android:textSize="14sp"
+
+                android:textColor="@color/cs_primary"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="26dp"
+
+            android:text="Restore Purchase"
+
+            android:textSize="15sp"
+
+            android:textColor="@color/cs_text_muted"
+
+            android:gravity="center"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+
+            android:layout_marginTop="24dp"
+
+            android:text="Continue"
+
+            android:textStyle="bold"
+            android:textSize="16sp"
+
+            android:textColor="@color/cs_white"
+
+            android:backgroundTint="@color/cs_primary"/>
+
+    </LinearLayout>
+
+</ScrollView>

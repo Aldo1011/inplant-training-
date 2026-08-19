@@ -30,8 +30,9 @@
         <activity android:name=".activities.HomeActivity"/>
         <activity android:name=".activities.SignupActivity"/>
         <activity android:name=".activities.LessonActivity"/>
+        <activity android:name=".activities.StoreActivity"/>
+        <activity android:name=".activities.ProfileActivity"/>
 
-            />
 
     </application>
 

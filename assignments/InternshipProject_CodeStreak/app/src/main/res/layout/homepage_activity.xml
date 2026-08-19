@@ -57,7 +57,7 @@
         android:id="@+id/statsBar"
 
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="104dp"
 
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -73,14 +73,32 @@
         <!-- STREAK -->
 
         <LinearLayout
+            android:id="@+id/streakCard"
+
             android:layout_width="0dp"
-            android:layout_height="match_parent"
 
             android:layout_weight="1"
 
-            android:gravity="center"
 
-            android:orientation="vertical">
+
+            android:gravity="center"
+            android:orientation="vertical"
+
+            android:background="@drawable/bg_stat_card"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:layout_height="88dp"
+            android:layout_margin="6dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+
+            >
+
+
 
             <TextView
                 android:id="@+id/streakValue"
@@ -93,8 +111,9 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
 
-                android:textColor="@color/cs_text_muted"/>
 
+
+                android:textColor="@color/cs_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,9 +121,12 @@
 
                 android:text="STREAK"
 
-                android:textSize="11sp"
+                android:textSize="10sp"
+                android:textStyle="bold"
 
-                android:textColor="@color/cs_text"/>
+
+
+                android:textColor="@color/cs_text_muted"/>
 
         </LinearLayout>
 
@@ -112,14 +134,29 @@
         <!-- HEARTS -->
 
         <LinearLayout
+            android:id="@+id/heartsCard"
+
             android:layout_width="0dp"
-            android:layout_height="52dp"
 
             android:layout_weight="1"
 
-            android:gravity="center"
 
-            android:orientation="vertical">
+
+            android:gravity="center"
+            android:orientation="vertical"
+
+            android:background="@drawable/bg_stat_card"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:layout_height="88dp"
+            android:layout_margin="6dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
 
             <TextView
                 android:id="@+id/heartsValue"
@@ -129,10 +166,10 @@
 
                 android:text="❤️ 5"
 
-                android:textColor="@color/cs_text_muted"
                 android:textSize="20sp"
+                android:textStyle="bold"
 
-                android:textStyle="bold" />
+                android:textColor="@color/cs_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -140,9 +177,10 @@
 
                 android:text="HEARTS"
 
-                android:textColor="@color/cs_text_muted"
+                android:textSize="10sp"
+                android:textStyle="bold"
 
-                android:textSize="11sp" />
+                android:textColor="@color/cs_text_muted"/>
 
         </LinearLayout>
 
@@ -150,14 +188,30 @@
         <!-- XP -->
 
         <LinearLayout
+            android:id="@+id/xpCard"
+
             android:layout_width="0dp"
-            android:layout_height="match_parent"
 
             android:layout_weight="1"
 
-            android:gravity="center"
 
-            android:orientation="vertical">
+
+            android:gravity="center"
+            android:orientation="vertical"
+
+            android:background="@drawable/bg_stat_card"
+
+            android:clickable="true"
+            android:focusable="true"
+
+            android:layout_height="88dp"
+            android:layout_margin="6dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+
+            >
 
             <TextView
                 android:id="@+id/xpValue"
@@ -178,7 +232,8 @@
 
                 android:text="XP"
 
-                android:textSize="11sp"
+                android:textSize="10sp"
+                android:textStyle="bold"
 
                 android:textColor="@color/cs_text_muted"/>
 
@@ -300,7 +355,7 @@
 
 
         <LinearLayout
-            android:id="@+id/navLessons"
+            android:id="@+id/navStore"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -317,7 +372,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lessons"
+                android:text="Store"
                 android:textSize="11sp"
                 android:textColor="@color/cs_text"/>
 
