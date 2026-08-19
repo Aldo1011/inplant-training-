@@ -5,4 +5,17 @@
     <color name="purple">#800080</color>
     <color name="blue">#0000FF</color>
 
+    <color name="cs_primary">#1844F5</color>
+    <color name="cs_secondary">#F4F5FB</color>
+    <color name="cs_accent">#09AFDC</color>
+
+    <color name="cs_text">#172033</color>
+    <color name="cs_text_muted">#667085</color>
+
+    <color name="cs_white">#FFFFFF</color>
+
+    <color name="cs_success">#22C55E</color>
+    <color name="cs_error">#EF4444</color>
+    <color name="cs_locked">#A8B0C0</color>
+
 </resources>

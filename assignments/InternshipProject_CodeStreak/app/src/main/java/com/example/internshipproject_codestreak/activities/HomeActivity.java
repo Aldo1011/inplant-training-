@@ -2,6 +2,7 @@ package com.example.internshipproject_codestreak.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,12 @@ public class HomeActivity extends AppCompatActivity {
     private UserRepository userRepository;
     private User currentUser;
 
+    private TextView streakValue;
+    private TextView heartsValue;
+    private TextView xpValue;
+    private TextView worldLabel;
+    private TextView worldTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +39,17 @@ public class HomeActivity extends AppCompatActivity {
                 R.id.codeStreakMap
         );
 
+        streakValue = findViewById(R.id.streakValue);
+        heartsValue = findViewById(R.id.heartsValue);
+        xpValue = findViewById(R.id.xpValue);
+
+        worldLabel = findViewById(R.id.worldLabel);
+        worldTitle = findViewById(R.id.worldTitle);
+
         userRepository = new UserRepository();
 
         checkDailyHearts();
+
     }
 
     private void checkDailyHearts() {
@@ -74,6 +89,8 @@ public class HomeActivity extends AppCompatActivity {
                     currentUser = user;
 
                     setupLessons();
+
+                    updatePlayerStats();
 
                 })
                 .addOnFailureListener(e -> {
@@ -176,6 +193,46 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
         );
+    }
+
+    private void updatePlayerStats() {
+
+        streakValue.setText(
+                "🔥 " + currentUser.getStreak()
+        );
+
+        heartsValue.setText(
+                "❤️ " + currentUser.getHearts()
+        );
+
+        xpValue.setText(
+                "⭐ " + currentUser.getXp()
+        );
+
+        worldLabel.setText(
+                "WORLD " + currentUser.getCurrentWorld()
+        );
+
+        worldTitle.setText(
+                getWorldTitle(
+                        currentUser.getCurrentWorld()
+                )
+        );
+    }
+
+    private String getWorldTitle(int world) {
+
+        switch (world) {
+
+            case 1:
+                return "THE AWAKENING";
+
+            case 2:
+                return "THE DECISION PATH";
+
+            default:
+                return "UNKNOWN WORLD";
+        }
     }
 
 }

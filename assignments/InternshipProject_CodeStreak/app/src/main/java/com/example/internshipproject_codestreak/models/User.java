@@ -16,6 +16,19 @@ public class User {
 
     private List<Integer> completedLessons;
 
+    private String lastHeartReset;
+
+    private String lastStreakDate;
+
+
+    public String getLastStreakDate() {
+        return lastStreakDate;
+    }
+
+    public void setLastStreakDate(String lastStreakDate) {
+        this.lastStreakDate = lastStreakDate;
+    }
+
     public String getLastHeartReset() {
         return lastHeartReset;
     }
@@ -23,8 +36,6 @@ public class User {
     public void setLastHeartReset(String lastHeartReset) {
         this.lastHeartReset = lastHeartReset;
     }
-
-    private String lastHeartReset;
 
     public String getUsername() {
         return username;
@@ -125,6 +136,7 @@ public class User {
         currentLesson = 1;
         hearts = 5;
         lastHeartReset = null;
+        lastStreakDate = null;
         completedLessons = new ArrayList<>();
 
     }

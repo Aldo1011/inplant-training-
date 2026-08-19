@@ -808,6 +808,8 @@ public class LessonActivity extends AppCompatActivity {
                             lesson.getId()
                     );
 
+                    userRepository.updateStreak(user);
+
                     // ---------------------------------------
                     // SAVE USER
                     // ---------------------------------------
@@ -827,6 +829,9 @@ public class LessonActivity extends AppCompatActivity {
                                         + "\n\n"
                                         + "❤️ Hearts remaining: "
                                         + user.getHearts()
+                                        + "\n"
+                                        + "🔥 Streak: "
+                                        + user.getStreak()
                         );
 
                         Button backButton =
@@ -1044,6 +1049,7 @@ public class LessonActivity extends AppCompatActivity {
 
             CodeExecutionEngine.ExecutionResult executionResult =
                     CodeExecutionEngine.execute(
+                            this,
                             code,
                             testCase.getInput()
                     );

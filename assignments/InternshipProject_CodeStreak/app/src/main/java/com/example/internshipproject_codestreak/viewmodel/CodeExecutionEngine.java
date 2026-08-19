@@ -1,7 +1,10 @@
 package com.example.internshipproject_codestreak.viewmodel;
 
+import android.content.Context;
+
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 
 import org.json.JSONObject;
 
@@ -14,18 +17,38 @@ public class CodeExecutionEngine {
         // Utility class
     }
 
+    private static void ensurePythonStarted(
+            Context context
+    ) {
+
+        if (!Python.isStarted()) {
+
+            Python.start(
+                    new AndroidPlatform(
+                            context.getApplicationContext()
+                    )
+            );
+        }
+    }
+
     public static ExecutionResult execute(
+            Context context,
             String code,
             String input
     ) {
 
         try {
 
+            // Make sure Chaquopy is running
+            ensurePythonStarted(context);
+
             Python python =
                     Python.getInstance();
 
             PyObject module =
-                    python.getModule(MODULE_NAME);
+                    python.getModule(
+                            MODULE_NAME
+                    );
 
             PyObject result =
                     module.callAttr(

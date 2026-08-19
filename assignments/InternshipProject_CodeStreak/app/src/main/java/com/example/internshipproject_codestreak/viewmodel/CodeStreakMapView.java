@@ -10,7 +10,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +27,13 @@ import java.util.List;
 public class CodeStreakMapView extends FrameLayout {
 
     private final Paint pathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     private final Path path = new Path();
+
+    private final Bitmap backgroundBitmap;
+
+    private final Paint backgroundPaint =
+            new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private final List<Lesson> lessons = new ArrayList<>();
 
@@ -31,6 +41,9 @@ public class CodeStreakMapView extends FrameLayout {
 
     private final int nodeSize;
     private final int verticalSpacing;
+
+
+
 
     // X positions as a percentage of screen width.
     // This gives us a less mechanical map.
@@ -54,21 +67,50 @@ public class CodeStreakMapView extends FrameLayout {
     ) {
         super(context, attrs);
 
+        backgroundBitmap =
+                BitmapFactory.decodeResource(
+                        getResources(),
+                        R.drawable.home_page_image
+                );
+
+        backgroundPaint.setFilterBitmap(true);
+
         setWillNotDraw(false);
 
-        nodeSize = dp(165);
-        verticalSpacing = dp(210);
+        nodeSize = dp(175);
+        verticalSpacing = dp(350);
 
         pathPaint.setStyle(Paint.Style.STROKE);
-        pathPaint.setStrokeWidth(dp(10));
+        pathPaint.setStyle(
+                Paint.Style.STROKE
+        );
+
+        pathPaint.setStrokeWidth(
+                dp(4)
+        );
+
+        pathPaint.setStrokeCap(
+                Paint.Cap.ROUND
+        );
+
+        pathPaint.setStrokeJoin(
+                Paint.Join.ROUND
+        );
+
+        pathPaint.setColor(
+                getResources().getColor(
+                        R.color.cs_accent
+                )
+        );
+
         pathPaint.setStrokeCap(Paint.Cap.ROUND);
         pathPaint.setStrokeJoin(Paint.Join.ROUND);
 
-        // Temporary path color.
-        // We'll style this later.
-        pathPaint.setColor(Color.rgb(205, 205, 205));
-
         setClipChildren(false);
+
+
+
+
     }
 
     public void setLessons(
@@ -103,9 +145,9 @@ public class CodeStreakMapView extends FrameLayout {
 
             lessonContainer.setTag(lesson);
 
-            // -----------------------------
-            // BUILDING
-            // -----------------------------
+            // =========================================
+            // ISLAND / BUILDING
+            // =========================================
 
             ImageView node =
                     new ImageView(getContext());
@@ -119,29 +161,107 @@ public class CodeStreakMapView extends FrameLayout {
             );
 
             if (lesson.isUnlocked()) {
-                node.setAlpha(1.0f);
+                node.setAlpha(1f);
             } else {
-                node.setAlpha(0.35f);
+                node.setAlpha(0.32f);
             }
 
-            FrameLayout.LayoutParams
-                    nodeParams =
+            int currentNodeSize =
+                    isBossLesson(lesson)
+                            ? dp(190)
+                            : nodeSize;
+
+            FrameLayout.LayoutParams nodeParams =
                     new FrameLayout.LayoutParams(
-                            nodeSize,
-                            nodeSize
+                            currentNodeSize,
+                            currentNodeSize
                     );
 
             nodeParams.gravity =
-                    Gravity.CENTER_HORIZONTAL;
+                    Gravity.TOP
+                            | Gravity.CENTER_HORIZONTAL;
 
             lessonContainer.addView(
                     node,
                     nodeParams
             );
 
-            // -----------------------------
-            // TITLE
-            // -----------------------------
+            // =========================================
+            // CURRENT / AVAILABLE GLOW
+            // =========================================
+
+            if (lesson.isUnlocked()
+                    && !lesson.isCompleted()) {
+
+                node.setElevation(
+                        dp(8)
+                );
+            }
+
+            // =========================================
+            // LESSON NUMBER
+            // =========================================
+
+            TextView number =
+                    createLessonNumber(
+                            lesson.getId(),
+                            lesson.isUnlocked()
+                    );
+
+            FrameLayout.LayoutParams
+                    numberParams =
+                    new FrameLayout.LayoutParams(
+                            dp(36),
+                            dp(36)
+                    );
+
+            numberParams.gravity =
+                    Gravity.TOP
+                            | Gravity.CENTER_HORIZONTAL;
+
+            numberParams.topMargin =
+                    dp(4);
+
+            lessonContainer.addView(
+                    number,
+                    numberParams
+            );
+
+            // =========================================
+            // TITLE CARD
+            // =========================================
+
+            LinearLayout titleCard =
+                    new LinearLayout(getContext());
+
+            titleCard.setOrientation(
+                    LinearLayout.VERTICAL
+            );
+
+            titleCard.setGravity(
+                    Gravity.CENTER
+            );
+
+            titleCard.setPadding(
+                    dp(16),
+                    dp(7),
+                    dp(16),
+                    dp(7)
+            );
+
+            titleCard.setBackground(
+                    getRoundedBackground(
+                            Color.WHITE,
+                            dp(18)
+                    )
+            );
+
+            if (lesson.isUnlocked()) {
+
+                titleCard.setElevation(
+                        dp(5)
+                );
+            }
 
             TextView title =
                     new TextView(getContext());
@@ -150,80 +270,167 @@ public class CodeStreakMapView extends FrameLayout {
                     lesson.getTitle()
             );
 
-            title.setTextSize(16);
-            title.setTextColor(
-                    Color.rgb(45, 45, 45)
-            );
-
-            title.setGravity(
-                    Gravity.CENTER
-            );
+            title.setTextSize(17);
 
             title.setTypeface(
                     null,
                     android.graphics.Typeface.BOLD
             );
 
+            title.setTextColor(
+                    getResources().getColor(
+                            R.color.cs_text
+                    )
+            );
+
+            title.setGravity(
+                    Gravity.CENTER
+            );
+
+            titleCard.addView(title);
+
+            // =========================================
+            // SUBTITLE
+            // =========================================
+
+            TextView subtitle =
+                    new TextView(getContext());
+
+            subtitle.setText(
+                    getLessonSubtitle(
+                            lesson.getId()
+                    )
+            );
+
+            subtitle.setTextSize(12);
+
+            subtitle.setTextColor(
+                    getResources().getColor(
+                            R.color.cs_text_muted
+                    )
+            );
+
+            subtitle.setGravity(
+                    Gravity.CENTER
+            );
+
+            titleCard.addView(subtitle);
+
             FrameLayout.LayoutParams
                     titleParams =
                     new FrameLayout.LayoutParams(
-                            LayoutParams.WRAP_CONTENT,
-                            dp(40)
+                            dp(190),
+                            dp(62)
                     );
 
             titleParams.gravity =
-                    Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+                    Gravity.TOP
+                            | Gravity.CENTER_HORIZONTAL;
 
             titleParams.topMargin =
-                    nodeSize - dp(5);
+                    currentNodeSize - dp(2);
 
             lessonContainer.addView(
-                    title,
+                    titleCard,
                     titleParams
             );
 
-            // -----------------------------
+            // =========================================
+            // LOCK ICON
+            // =========================================
+
+            if (!lesson.isUnlocked()) {
+
+                TextView lock =
+                        new TextView(getContext());
+
+                lock.setText("🔒");
+
+                lock.setTextSize(16);
+
+                lock.setGravity(
+                        Gravity.CENTER
+                );
+
+                lock.setBackground(
+                        getRoundedBackground(
+                                getResources()
+                                        .getColor(
+                                                R.color.cs_locked
+                                        ),
+                                dp(18)
+                        )
+                );
+
+                FrameLayout.LayoutParams
+                        lockParams =
+                        new FrameLayout.LayoutParams(
+                                dp(36),
+                                dp(36)
+                        );
+
+                lockParams.gravity =
+                        Gravity.TOP
+                                | Gravity.CENTER_HORIZONTAL;
+
+                lockParams.topMargin =
+                        currentNodeSize - dp(30);
+
+                lessonContainer.addView(
+                        lock,
+                        lockParams
+                );
+            }
+
+            // =========================================
             // CLICK
-            // -----------------------------
+            // =========================================
 
-            lessonContainer.setClickable(true);
+            lessonContainer.setClickable(
+                    lesson.isUnlocked()
+            );
 
-            lessonContainer.setOnClickListener(v -> {
+            lessonContainer.setOnClickListener(
+                    v -> {
 
-                if (!lesson.isUnlocked()) {
-                    return;
-                }
+                        if (!lesson.isUnlocked()) {
+                            return;
+                        }
 
-                // Small bounce animation.
-                lessonContainer.animate()
-                        .scaleX(0.92f)
-                        .scaleY(0.92f)
-                        .setDuration(80)
-                        .withEndAction(() -> {
+                        lessonContainer
+                                .animate()
+                                .scaleX(0.96f)
+                                .scaleY(0.96f)
+                                .setDuration(80)
+                                .withEndAction(() -> {
 
-                            lessonContainer.animate()
-                                    .scaleX(1.0f)
-                                    .scaleY(1.0f)
-                                    .setDuration(100)
-                                    .withEndAction(() -> {
+                                    lessonContainer
+                                            .animate()
+                                            .scaleX(1f)
+                                            .scaleY(1f)
+                                            .setDuration(100)
+                                            .withEndAction(() -> {
 
-                                        if (listener != null) {
-                                            listener.onLessonClick(
-                                                    lesson
-                                            );
-                                        }
+                                                if (listener != null) {
 
-                                    })
-                                    .start();
+                                                    listener.onLessonClick(
+                                                            lesson
+                                                    );
+                                                }
 
-                        })
-                        .start();
-            });
+                                            })
+                                            .start();
 
-            addView(lessonContainer);
+                                })
+                                .start();
+                    }
+            );
+
+            addView(
+                    lessonContainer
+            );
         }
     }
-
     private int getLessonImage(int lessonId) {
 
         switch (lessonId) {
@@ -350,9 +557,71 @@ public class CodeStreakMapView extends FrameLayout {
             @NonNull Canvas canvas
     ) {
 
+
+
         drawLessonPath(canvas);
 
         super.dispatchDraw(canvas);
+    }
+
+    private void drawMapBackground(Canvas canvas) {
+
+        if (backgroundBitmap == null) {
+            canvas.drawColor(
+                    getResources().getColor(
+                            R.color.cs_secondary
+                    )
+            );
+
+            return;
+        }
+
+        int viewWidth = getWidth();
+        int viewHeight = getHeight();
+
+        int bitmapWidth =
+                backgroundBitmap.getWidth();
+
+        int bitmapHeight =
+                backgroundBitmap.getHeight();
+
+        if (bitmapWidth <= 0 || bitmapHeight <= 0) {
+            return;
+        }
+
+
+        float scale =
+                (float) viewWidth
+                        / bitmapWidth;
+
+        int scaledHeight =
+                (int) (
+                        bitmapHeight * scale
+                );
+
+
+
+        for (
+                int y = 0;
+                y < viewHeight;
+                y += scaledHeight
+        ) {
+
+            Rect destination =
+                    new Rect(
+                            0,
+                            y,
+                            viewWidth,
+                            y + scaledHeight
+                    );
+
+            canvas.drawBitmap(
+                    backgroundBitmap,
+                    null,
+                    destination,
+                    backgroundPaint
+            );
+        }
     }
 
     private void drawLessonPath(Canvas canvas) {
@@ -472,6 +741,9 @@ public class CodeStreakMapView extends FrameLayout {
                 pathPaint
         );
     }
+
+
+
     private float getXPosition(int index) {
 
         if (index < xPositions.length) {
@@ -493,4 +765,115 @@ public class CodeStreakMapView extends FrameLayout {
                         + 0.5f
         );
     }
+
+
+    private TextView createLessonNumber(
+            int lessonId,
+            boolean unlocked
+    ) {
+
+        TextView number =
+                new TextView(getContext());
+
+        number.setText(
+                String.valueOf(lessonId)
+        );
+
+        number.setTextSize(16);
+
+        number.setTypeface(
+                null,
+                android.graphics.Typeface.BOLD
+        );
+
+        number.setGravity(
+                Gravity.CENTER
+        );
+
+        number.setTextColor(
+                Color.WHITE
+        );
+
+        number.setBackground(
+                getRoundedBackground(
+                        unlocked
+                                ? getResources()
+                                  .getColor(
+                                          R.color.cs_primary
+                                  )
+                                : getResources()
+                                  .getColor(
+                                          R.color.cs_locked
+                                  ),
+                        dp(20)
+                )
+        );
+
+        return number;
+    }
+
+    private android.graphics.drawable.GradientDrawable
+    getRoundedBackground(
+            int color,
+            int radius
+    ) {
+
+        android.graphics.drawable.GradientDrawable
+                background =
+                new android.graphics.drawable.GradientDrawable();
+
+        background.setColor(color);
+
+        background.setCornerRadius(
+                radius
+        );
+
+        return background;
+    }
+
+    private String getLessonSubtitle(
+            int lessonId
+    ) {
+
+        switch (lessonId) {
+
+            case 1:
+                return "Print your first line";
+
+            case 2:
+                return "Variables & memory";
+
+            case 3:
+                return "Python's basic types";
+
+            case 4:
+                return "Take input from the world";
+
+            case 5:
+                return "Make Python calculate";
+
+            case 6:
+                return "Change data types";
+
+            case 7:
+                return "Make Python speak";
+
+            case 8:
+                return "World 1 Boss";
+
+            case 9:
+                return "Make your first decision";
+
+            default:
+                return "Continue your journey";
+        }
+    }
+    private boolean isBossLesson(
+            Lesson lesson
+    ) {
+
+        return lesson.getId() == 8
+                || lesson.getId() == 17;
+    }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.internshipproject_codestreak.activities.HomeActivity;
 import com.example.internshipproject_codestreak.activities.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(mUser!=null){
 
-            intent =  new Intent(this, LoginActivity.class);
+            intent =  new Intent(this, HomeActivity.class);
 
         }else{
 

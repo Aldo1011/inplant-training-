@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 
@@ -70,6 +71,50 @@ public class UserRepository {
 
                     return com.google.android.gms.tasks.Tasks.forResult(user);
                 });
+    }
+
+    public void updateStreak(User user) {
+
+        String today =
+                LocalDate.now().toString();
+
+        String lastStreakDate =
+                user.getLastStreakDate();
+
+        // First lesson ever
+        if (lastStreakDate == null) {
+
+            user.setStreak(1);
+            user.setLastStreakDate(today);
+
+            return;
+        }
+
+        // Already completed a lesson today
+        if (lastStreakDate.equals(today)) {
+            return;
+        }
+
+        LocalDate lastDate =
+                LocalDate.parse(lastStreakDate);
+
+        LocalDate todayDate =
+                LocalDate.now();
+
+        // Consecutive day
+        if (lastDate.plusDays(1).equals(todayDate)) {
+
+            user.setStreak(
+                    user.getStreak() + 1
+            );
+
+        } else {
+
+            // Streak was broken
+            user.setStreak(1);
+        }
+
+        user.setLastStreakDate(today);
     }
 
 

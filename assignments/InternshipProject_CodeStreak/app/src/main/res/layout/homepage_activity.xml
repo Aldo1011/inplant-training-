@@ -4,50 +4,351 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/cs_secondary"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/signup_style"
-        android:text="Codestreak"
+    <!-- ============================== -->
+    <!-- TOP BAR -->
+    <!-- ============================== -->
 
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+
+        android:gravity="center_vertical"
+
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:id="@+id/appTitle"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+
+            android:text="CodeStreak"
+
+            android:textSize="26sp"
+            android:textStyle="bold"
+
+            android:textColor="@color/cs_text"/>
+
+        <TextView
+            android:id="@+id/profileButton"
+
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+
+            android:gravity="center"
+
+            android:text="👤"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+
+    <!-- ============================== -->
+    <!-- PLAYER STATS -->
+    <!-- ============================== -->
+
+    <LinearLayout
+        android:id="@+id/statsBar"
+
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+
+        android:padding="8dp"
+
+        android:orientation="horizontal"
+
+        android:weightSum="3">
+
+
+        <!-- STREAK -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/streakValue"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="🔥 0"
+
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text_muted"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="STREAK"
+
+                android:textSize="11sp"
+
+                android:textColor="@color/cs_text"/>
+
+        </LinearLayout>
+
+
+        <!-- HEARTS -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+
+            android:layout_weight="1"
+
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/heartsValue"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="❤️ 5"
+
+                android:textColor="@color/cs_text_muted"
+                android:textSize="20sp"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="HEARTS"
+
+                android:textColor="@color/cs_text_muted"
+
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+        <!-- XP -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/xpValue"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="⭐ 0"
+
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="XP"
+
+                android:textSize="11sp"
+
+                android:textColor="@color/cs_text_muted"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- ============================== -->
+    <!-- WORLD + MAP -->
+    <!-- ============================== -->
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="1"
+
         android:fillViewport="true"
+
         android:clipChildren="false"
-        android:background="#FAF5FC">
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical">
 
+
             <TextView
-                android:id="@+id/homeTitle"
+                android:id="@+id/worldLabel"
+
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
-                android:paddingStart="24dp"
-                android:text="Codestreak"
-                android:textSize="22sp"
-                android:textColor="#333333"
-                android:textStyle="bold"/>
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="12dp"
+
+                android:gravity="center"
+
+                android:text="WORLD 1"
+
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text_muted"/>
+
+
+            <TextView
+                android:id="@+id/worldTitle"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+
+                android:gravity="center"
+
+                android:text="THE AWAKENING"
+
+                android:textSize="24sp"
+                android:textStyle="bold"
+
+                android:textColor="@color/cs_text"/>
+
 
             <com.example.internshipproject_codestreak.viewmodel.CodeStreakMapView
                 android:id="@+id/codeStreakMap"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+
+
+                />
 
         </LinearLayout>
 
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
 
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+
+        android:background="#FFFFFF"
+
+        android:elevation="10dp"
+
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+
+        <LinearLayout
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⌂"
+                android:textSize="26sp"
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="11sp"
+                android:textColor="@color/cs_text"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/navLessons"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▤"
+                android:textSize="24sp"
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lessons"
+                android:textSize="11sp"
+                android:textColor="@color/cs_text"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/navProfile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="●"
+                android:textSize="24sp"
+                android:textColor="@color/cs_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textSize="11sp"
+                android:textColor="@color/cs_text"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>
